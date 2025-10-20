@@ -59,15 +59,18 @@ erDiagram
 
 ```mermaid
 erDiagram
+    ORDERS ||--o{ ORDER_ITEMS : has
+    PRODUCTS ||--o{ ORDER_ITEMS : includes
+
     ORDERS {
-      int    order_id PK
-      date   order_date
+      int     order_id PK
+      date    order_date
       varchar client_name
       varchar client_address
     }
 
     PRODUCTS {
-      int    product_id PK
+      int     product_id PK
       varchar product_name
     }
 
@@ -75,11 +78,8 @@ erDiagram
       int order_id FK
       int product_id FK
       int qty
-      PK (order_id, product_id)
+      %% Composite primary key: order_id + product_id
     }
-
-    ORDERS ||--o{ ORDER_ITEMS : has
-    PRODUCTS ||--o{ ORDER_ITEMS : included_in
 ```
 
 ### 3NF
