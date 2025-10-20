@@ -41,6 +41,49 @@ The database consists of four main tables:
 
 ## 🔗 Entity Relationship Diagram
 
+### 1NF
+
+```mermaid
+erDiagram
+    ORDER_1NF {
+      int    order_id PK
+      varchar product_name
+      int     qty
+      date    order_date
+      varchar client_name
+      varchar client_address
+    }
+```
+
+### 2NF
+
+```mermaid
+erDiagram
+    ORDERS {
+      int    order_id PK
+      date   order_date
+      varchar client_name
+      varchar client_address
+    }
+
+    PRODUCTS {
+      int    product_id PK
+      varchar product_name
+    }
+
+    ORDER_ITEMS {
+      int order_id FK
+      int product_id FK
+      int qty
+      PK (order_id, product_id)
+    }
+
+    ORDERS ||--o{ ORDER_ITEMS : has
+    PRODUCTS ||--o{ ORDER_ITEMS : included_in
+```
+
+### 3NF
+
 ```mermaid
 erDiagram
     CLIENTS ||--o{ ORDERS : places
